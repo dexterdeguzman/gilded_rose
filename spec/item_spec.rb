@@ -16,4 +16,21 @@ describe Item do
     end
   end
 
+  describe "Validation" do
+    context "passed sell date" do
+      it "quality degrades twice as fast" do
+        expect(false).to eq true
+      end
+    end
+
+    describe "Quality" do
+      it "is never negative" do
+        expect(false).to eq true
+      end
+
+      it "is never more than 50" do
+        expect(false).to eq true
+      end
+    end
+  end
 end
