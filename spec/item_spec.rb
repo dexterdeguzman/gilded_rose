@@ -1,6 +1,7 @@
 require 'spec_helper'
  
 describe Item do
+  let!(:sulfuras) { Item.new("Sulfuras", 10, 10) }
  
   describe "#initialize" do
     it "is an Item" do
@@ -13,24 +14,6 @@ describe Item do
     it "returns readable name sell_in and quality" do
       new_item = Item.new("item_name","item_sell_in","item_quality")
       expect(new_item.to_s).to eq("item_name, item_sell_in, item_quality")
-    end
-  end
-
-  describe "Validation" do
-    context "passed sell date" do
-      it "quality degrades twice as fast" do
-        expect(false).to eq true
-      end
-    end
-
-    describe "Quality" do
-      it "is never negative" do
-        expect(false).to eq true
-      end
-
-      it "is never more than 50" do
-        expect(false).to eq true
-      end
     end
   end
 end

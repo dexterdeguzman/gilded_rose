@@ -7,11 +7,27 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       case item.name
-      when "Sulfuras" then
+      when "Sulfuras"
         item.quality
-      when "Aged Brie" then
-      when "Conjured" then
-      when "Backstage passes" then
+      when "Aged Brie"
+        item.sell_in -=1
+        item.quality += 1 if item.sell_in <= 50
+        item.quality += 1 if item.sell_in < 0
+      when "Backstage passes"
+        item.sell_in -=1
+        if item.sell_in < 0 
+          item.quality = 0
+        elsif item.sell_in <= 50
+          item.quality += 1 if item.sell_in <=50
+          item.quality += 1 if item.sell_in <= 10
+          item.quality += 1 if item.sell_in <= 5
+        end
+      when "Conjured"
+        if item.sell_in < 0
+          item.quality -= 2
+        elsif item.sell_in <= 50
+          item.quality += 2
+        end
       end
     end
   end
