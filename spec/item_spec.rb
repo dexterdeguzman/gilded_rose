@@ -1,6 +1,7 @@
 require 'spec_helper'
  
 describe Item do
+  let!(:sulfuras) { Item.new("Sulfuras", 10, 10) }
  
   describe "#initialize" do
     it "is an Item" do
@@ -15,5 +16,4 @@ describe Item do
       expect(new_item.to_s).to eq("item_name, item_sell_in, item_quality")
     end
   end
-
 end
