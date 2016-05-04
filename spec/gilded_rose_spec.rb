@@ -2,7 +2,7 @@ require 'spec_helper'
  
 describe GildedRose do
 
-  let!(:sulfuras) { Item.new("Sulfuras", 10, 50) }
+  let!(:sulfuras) { Item.new("Sulfuras, Hand of Ragnaros", 10, 50) }
   let!(:aged_brie) { Item.new("Aged Brie", 10, 10) }
   let!(:aged_brie2) { Item.new("Aged Brie", -1, 10) }
   let!(:backstage) { Item.new("Backstage passes", 15, 15) }
