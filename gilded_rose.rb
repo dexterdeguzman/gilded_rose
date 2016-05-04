@@ -8,7 +8,8 @@ class GildedRose
     @items.each do |item|
       case item.name
       when "Sulfuras"
-        item.quality
+        item.sell_in
+        item.quality = 80
       when "Aged Brie"
         item.sell_in -=1
         item.quality += 1 if item.sell_in <= 50
@@ -23,11 +24,9 @@ class GildedRose
           item.quality += 1 if item.sell_in <= 5
         end
       when "Conjured"
-        if item.sell_in < 0
-          item.quality -= 2
-        elsif item.sell_in <= 50
-          item.quality += 2
-        end
+        item.sell_in -=1
+        item.quality -= 2 if item.sell_in <= 50
+        item.quality -= 2 if item.sell_in < 0
       end
     end
   end

@@ -2,7 +2,7 @@ require 'spec_helper'
  
 describe GildedRose do
 
-  let!(:sulfuras) { Item.new("Sulfuras", 10, 10) }
+  let!(:sulfuras) { Item.new("Sulfuras", 10, 50) }
   let!(:aged_brie) { Item.new("Aged Brie", 10, 10) }
   let!(:aged_brie2) { Item.new("Aged Brie", -1, 10) }
   let!(:backstage) { Item.new("Backstage passes", 15, 15) }
@@ -10,14 +10,22 @@ describe GildedRose do
   let!(:backstage3) { Item.new("Backstage passes", 5, 15) }
   let!(:backstage4) { Item.new("Backstage passes", -1, 15) }
   let!(:conjured) { Item.new("Conjured", 10, 10) }
+  let!(:conjured2) { Item.new("Conjured", -4, 10) }
 
   describe "#update_quality" do
     context "Sulfuras" do
-      it "does never had to be sold or decreases in quality" do
+      it "does never had to be sold" do
         gilded_rose = GildedRose.new([sulfuras])
         gilded_rose.update_quality
 
-        expect(sulfuras.quality).to eq 10 
+        expect(sulfuras.sell_in).to eq sulfuras.sell_in
+      end
+
+      it "does never decreases in quality" do
+        gilded_rose = GildedRose.new([sulfuras])
+        gilded_rose.update_quality
+
+        expect(sulfuras.quality).to eq 80 
       end
     end
 
@@ -72,14 +80,14 @@ describe GildedRose do
         gilded_rose = GildedRose.new([conjured])
         gilded_rose.update_quality
       
-        expect(conjured.quality).to eq 12
+        expect(conjured.quality).to eq 8
       end
 
-      it "degrades twice as fast" do
+      it "degrades twice as fast after the sell in date" do
         gilded_rose = GildedRose.new([conjured])
         gilded_rose.update_quality
       
-        expect(conjured.quality).to eq 12
+        expect(conjured.quality).to eq 8
       end
     end
 
