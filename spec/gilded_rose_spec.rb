@@ -36,13 +36,6 @@ describe GildedRose do
       
         expect(aged_brie.quality).to eq 11
       end
-
-      it "quality increases twice after the concert" do
-        gilded_rose = GildedRose.new([aged_brie2])
-        gilded_rose.update_quality
-      
-        expect(aged_brie2.quality).to eq 12
-      end
     end
 
     context "Backstage passes" do
