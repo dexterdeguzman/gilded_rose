@@ -13,6 +13,7 @@ class GildedRose
         item.quality = 80
       when /aged brie/
         item.quality += 1 if item.sell_in <= 50
+        item.quality += 1 if item.sell_in < 0
       when /backstage passes/
         if item.sell_in < 0 
           item.quality = 0
