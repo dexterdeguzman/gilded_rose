@@ -5,6 +5,7 @@ describe GildedRose do
   let!(:sulfuras) { Item.new("Sulfuras, Hand of Ragnaros", 10, 50) }
   let!(:aged_brie) { Item.new("Aged Brie", 10, 10) }
   let!(:aged_brie2) { Item.new("Aged Brie", -1, 10) }
+  let!(:aged_brie3) { Item.new("Aged Brie", 10, -1) }
   let!(:backstage) { Item.new("Backstage passes", 15, 15) }
   let!(:backstage2) { Item.new("Backstage passes", 9, 15) }
   let!(:backstage3) { Item.new("Backstage passes", 5, 15) }
@@ -12,7 +13,17 @@ describe GildedRose do
   let!(:conjured) { Item.new("Conjured", 10, 10) }
   let!(:conjured2) { Item.new("Conjured", -4, 10) }
 
+  let!(:inventory) {[sulfuras, aged_brie, backstage, conjured]}
+
   describe "#update_quality" do
+    it "processes the items" do
+      gilded_rose = GildedRose.new(inventory)
+      expect(gilded_rose).to receive(:process).exactly(inventory.count).times
+      gilded_rose.update_quality
+    end
+  end
+
+  describe "#process" do
     context "Sulfuras" do
       it "does never had to be sold" do
         gilded_rose = GildedRose.new([sulfuras])
@@ -42,6 +53,13 @@ describe GildedRose do
         gilded_rose.update_quality
       
         expect(aged_brie2.quality).to eq 12
+      end
+
+      it "quality drops to 0 when quality is negative" do
+        gilded_rose = GildedRose.new([aged_brie3])
+        gilded_rose.update_quality
+      
+        expect(aged_brie3.quality).to eq 0
       end
     end
 
