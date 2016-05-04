@@ -6,16 +6,14 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
+      validate(item)
+      decrement(item)
       case item.name
       when "Sulfuras"
-        item.sell_in
         item.quality = 80
       when "Aged Brie"
-        item.sell_in -=1
         item.quality += 1 if item.sell_in <= 50
-        item.quality += 1 if item.sell_in < 0
       when "Backstage passes"
-        item.sell_in -=1
         if item.sell_in < 0 
           item.quality = 0
         elsif item.sell_in <= 50
@@ -24,11 +22,22 @@ class GildedRose
           item.quality += 1 if item.sell_in <= 5
         end
       when "Conjured"
-        item.sell_in -=1
         item.quality -= 2 if item.sell_in <= 50
         item.quality -= 2 if item.sell_in < 0
       end
     end
+  end
+
+  private
+
+  def validate(item)
+    if item.quality < 0
+      item.quality
+    end
+  end
+
+  def decrement(item)
+    item.sell_in -= 1 unless item.name == "Sulfuras"
   end
 end
 
