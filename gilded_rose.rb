@@ -66,4 +66,10 @@ class Item
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
+
+  def update_quality_test1234()
+    @items.each do |item|
+      process(item)
+    end
+  end
 end
